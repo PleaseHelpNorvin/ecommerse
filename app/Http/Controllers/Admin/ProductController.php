@@ -13,8 +13,8 @@ class ProductController extends Controller
 {
     //
     public function index(){
-        $products = Product::select('products.*', 'category.categoryName', 'product_color.name')
-                        ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
+        $products = Product::select('products.*', 'category.categoryName')
+                        // ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
                         ->leftJoin('category', 'products.category_id', '=', 'category.id')
                         ->simplePaginate(4);
         return view('admin.pages.product.product', compact('products'));
@@ -32,8 +32,8 @@ class ProductController extends Controller
             'productName' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'required|exists:category,id',
-            'color_id' => 'required|exists:product_color,id',
-            'stockQuantity' => 'required|integer|min:0',
+            // 'color_id' => 'required|exists:product_color,id',
+            // 'stockQuantity' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -48,8 +48,8 @@ class ProductController extends Controller
             'productName' => $validatedData['productName'],
             'description' => $validatedData['description'],
             'category_id' => $validatedData['category_id'],
-            'color_id' => $validatedData['color_id'],
-            'stockQuantity' => $validatedData['stockQuantity'],
+            // 'color_id' => $validatedData['color_id'],
+            // 'stockQuantity' => $validatedData['stockQuantity'],
             'price' => $validatedData['price'],
             'imagePath' => $imagePath,
         ]);
@@ -67,8 +67,8 @@ class ProductController extends Controller
             'productName' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'required',
-            'color_id' => 'required',
-            'stockQuantity' => 'required|integer|min:0',
+            // 'color_id' => 'required',
+            // 'stockQuantity' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'imageUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -88,8 +88,8 @@ class ProductController extends Controller
         $product->productName = $validatedData['productName'];
         $product->description = $validatedData['description'];
         $product->category_id = $validatedData['category_id'];
-        $product->color_id = $validatedData['color_id'];
-        $product->stockQuantity = $validatedData['stockQuantity'];
+        // $product->color_id = $validatedData['color_id'];
+        // $product->stockQuantity = $validatedData['stockQuantity'];
         $product->price = $validatedData['price'];
 
         $product->save();
@@ -106,8 +106,8 @@ class ProductController extends Controller
             $query->where('products.productName', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('products.description', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('category.categoryName', 'LIKE', '%' . $searchQuery . '%')
-                    ->orWhere('product_color.name', 'LIKE', '%' . $searchQuery . '%')
-                    ->orWhere('products.stockQuantity', 'LIKE', '%' . $searchQuery . '%')
+                    // ->orWhere('product_color.name', 'LIKE', '%' . $searchQuery . '%')
+                    // ->orWhere('products.stockQuantity', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('products.price', 'LIKE', '%' . $searchQuery . '%');
         })->Paginate(0);
         return view('admin.pages.product.product', compact('products'));

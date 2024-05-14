@@ -6,7 +6,9 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\CheckOut;
 use App\Models\ClientUser;
-use App\Models\OrderHistory;
+// use App\Models\OrderHistory;
+use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use App\Models\CheckOutHistory;
 
@@ -98,9 +100,21 @@ class CartController extends Controller
 
         $checkouts = CheckOut::with('product')
         ->byClientUser($clientUser->id)
+        ->leftJoin('products', 'check_out.product_id', '=', 'products.id')
+        ->select('check_out.*', 'products.id as order_product_id')
         ->get();
 
-        return view('client.pages.addtocart.checkoutform', compact('username','checkouts','clientUser','totalPrice'));
+        // dd($checkouts);
+        $orderNumber = Str::random(6);
+        $countItem = Checkout::where('clientuser_id',$clientUser->id)->count('id');
+
+
+        
+        // $product_checkouts = Order::with('product')
+        // ->byClientUser($clientUser->id)
+        // ->get();
+
+        return view('client.pages.addtocart.checkoutform', compact('username','checkouts','clientUser','totalPrice','orderNumber','countItem'));
     }
 
     // public function checkOutFormPost(Request $request)
@@ -126,33 +140,121 @@ class CartController extends Controller
         // // Redirect back or wherever you want
         // return redirect()->back()->with('success', 'Order placed successfully!');
     // }
-    public function clientOrder(Request $request, $username){
-        $check_out_id = $request->input('product_id');
-        // Validate the request data
-        $validatedData = $request->validate([
-            // 'check_out_id' => 'required',
-            'address' => 'required|string',
-            'mode_of_payment' => 'required|string|in:Gcash,COD',
-            'total_price' => 'required|numeric',
-            'costumer_id' => 'required',
-            'fullname'=>'required|string',
-        ]);
+    // public function clientOrder(Request $request, $username){
+    //     // $check_out_id = $request->input('product_id');
+    //     // Validate the request data
+    //     // $validatedData = $request->validate([
+    //     //     // 'check_out_id' => 'required',
+    //     //     'address' => 'required|string',
+    //     //     'mode_of_payment' => 'required|string|in:Gcash,COD',
+    //     //     'total_price' => 'required|numeric',
+    //     //     'costumer_id' => 'required',
+    //     //     'fullname'=>'required|string',
+    //     // ]);
     
-        // Create a new order
-        $order = new Order();
-        // $order->check_out_id = $check_out_id;
-        $order->customer_id = $validatedData['costumer_id'];
-        $order->fullname = $validatedData['fullname'];
-        $order->status = 'pending';
-        $order->total = $validatedData['total_price'];
-        $order->address = $validatedData['address'];
-        $order->mop = $validatedData['mode_of_payment'];
-        // Save the order
-        $order->save();
+    //     // // Create a new order
+    //     // $order = new Order();
+    //     // // $order->check_out_id = $check_out_id;
+    //     // $order->customer_id = $validatedData['costumer_id'];
+    //     // $order->fullname = $validatedData['fullname'];
+    //     // $order->status = 'pending';
+    //     // $order->total = $validatedData['total_price'];
+    //     // $order->address = $validatedData['address'];
+    //     // $order->mop = $validatedData['mode_of_payment'];
+    //     // // Save the order
+    //     // $order->save();
 
-        // Redirect or return a response as needed
-        return redirect()->route('clientorder.view',['username' => $username]); // Redirect to a confirmation page
+    //     // Validate the incoming request data
+    //     $validatedData = $request->validate([
+    //         'customer_id' => 'required|exists:client_user,id',
+    //         'check_out_ids' => 'required|array',
+    //         'fullname' => 'required|string',
+    //         'address' => 'required|string',
+    //         'mode_of_payment' => 'required|string',
+    //         'total_price' => 'required|numeric',
+    //     ]);
+
+    //     // Create a new order instance
+    //     $order = new Order();
+    //     $order->customer_id = $validatedData['customer_id'];
+    //     $order->check_out_ids = json_encode($validatedData['check_out_ids']);
+    //     $order->fullname = $validatedData['fullname'];
+    //     $order->address = $validatedData['address'];
+    //     $order->mop = $validatedData['mode_of_payment'];
+    //     $order->total = $validatedData['total_price'];
+
+    //     // Save the order
+    //     $order->save();
+
+    //     // Redirect or return a response as needed
+    //     return redirect()->route('clientorder.view',['username' => $username]); // Redirect to a confirmation page
+    // }
+    // public function clientOrder(Request $request, $username)
+    // {
+    //     // Validate the incoming request data
+    //     $validatedData = $request->validate([
+    //         'customer_id' => 'required|exists:client_user,id',
+    //         'check_out_ids' => 'required|array',
+    //         'check_out_product_id' => 'required|array',
+    //         'fullname' => 'required|string',
+    //         'address' => 'required|string',
+    //         'mode_of_payment' => 'required|string',
+    //         'total_price' => 'required|numeric',
+    //     ]);
+    //     // dd($validatedData);
+    //     // Create a new order instance
+    //     $order = new Order();
+    
+    //     // Assign values to the order instance
+    //     $order->customer_id = $validatedData['customer_id'];
+    //     $order->check_out_ids = json_encode($validatedData['check_out_ids']); // Convert array to JSON
+    //     $order->check_out_product_id = json_encode($validatedData['check_out_product_id']);
+    //     $order->fullname = $validatedData['fullname'];
+    //     $order->address = $validatedData['address'];
+    //     $order->mop = $validatedData['mode_of_payment'];
+    //     $order->total = $validatedData['total_price'];
+    
+    //     // Save the order
+    //     $order->save();
+    
+    //     // Redirect to a confirmation page
+    //     return redirect()->route('clientorder.view', ['username' => $username]);
+    // }
+    public function clientOrder(Request $request, $username)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'customer_id' => 'required|exists:client_user,id',
+            'order_product_id' => 'required', // Changed to order_product_id
+            'order_number' => 'required',
+            'order_quantity_by_product' => 'required',
+            'fullname' => 'required|string',
+            'address' => 'required|string',
+            'mode_of_payment' => 'required|string',
+            'total_price' => 'required|numeric',
+        ]);
+        // dd($validatedData);
+
+        // Iterate over each order_product_id to create multiple orders
+        foreach ($validatedData['order_product_id'] as $orderProductId) {
+            // Create a new order instance for each product
+            Order::create([
+                'customer_id' => $validatedData['customer_id'],
+                'order_product_id' => $orderProductId,
+                'order_number' =>$validatedData['order_number'],
+                'order_quantity_by_product' => $validatedData['order_quantity_by_product'],
+                'fullname' => $validatedData['fullname'],
+                'address' => $validatedData['address'],
+                'mop' => $validatedData['mode_of_payment'],
+                'total' => $validatedData['total_price'],
+            ]);
+        }
+
+        // Redirect to a confirmation page
+        return redirect()->route('clientorder.view', ['username' => $username]);
     }
+
+    
         
     
 }

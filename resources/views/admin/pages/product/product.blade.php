@@ -24,8 +24,8 @@
                         <th>Product Name</th>
                         {{-- <th>Description</th> --}}
                         <th>Category</th>
-                        <th>Color</th>
-                        <th>Stock Quantity</th>
+                        {{-- <th>Color</th> --}}
+                        {{-- <th>Stock Quantity</th> --}}
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
@@ -40,8 +40,8 @@
                             <td>{{$product->productName}}</td>
                             {{-- <td>{{$product->description	}}</td> --}}
                             <td>{{$product->categoryName }}</td>
-                            <td>{{$product->name}}</td>
-                            <td>{{$product->stockQuantity}}</td>
+                            {{-- <td>{{$product->name}}</td> --}}
+                            {{-- <td>{{$product->stockQuantity}}</td> --}}
                             <td><small>₱</small>{{$product->price}}</td>
                             <td >
                                 <div class="td-flex">

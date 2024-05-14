@@ -30,7 +30,7 @@
                     @enderror
                 </div>
                 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="color_id">Color:</label>
                     <select id="color_id" name="color_id">
                         @foreach($colors as $color)
@@ -40,14 +40,14 @@
                     @error('color_id')
                         <div class="error">{{ $message }}</div>
                     @enderror
-                </div>
-                <div class="form-group">
+                </div> --}}
+                {{-- <div class="form-group">
                     <label for="stockQuantity">Stock Quantity:</label>
                     <input type="number" id="stockQuantity" name="stockQuantity">
                     @error('stockQuantity')
                         <div class="error">{{ $message }}</div>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="price">Price:</label>
                     <input type="number" id="price" name="price">

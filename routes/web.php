@@ -41,7 +41,7 @@ Route::get('dashboard/{username}/products/{categoryId}', [clientDashboradControl
 Route::get('admin/{username}/dashboard/search-dashboard', [clientDashboradController::class, 'dashboardSearch'])->name('dashboard.search');
 Route::get('client/{username}/products/{productId}', [ProductsController::class, 'productsIndex'])->name('products.view');
 //client order
-Route::post('client/order/{username}',[CartController::class, 'clientOrder'])->name('clientOrder.add');
+Route::post('client/order/{username}', [CartController::class, 'clientOrder'])->name('clientOrder.add');
 //client carts
 Route::get('client/cart/{username}',[CartController::class, 'index'])->name('cart.view');
 Route::post('client/check-out/{username}',[CartController::class, 'checkOutPost'])->name('checkout.post');
@@ -64,7 +64,7 @@ Route::get('admin/dashboard',[adminDashboardController::class, 'index'])->name('
 
 //orderlist//
 Route::get('admin/order', [adminOrderController::class, 'index'])->name('adminOrder.view');
-Route::get('admin/orderlist/{clientId}', [AdminOrderController::class,'orderListIndex'])->name('orderlist.view');
+Route::get('admin/orderlist/{clientId}/{orderRanNum}', [AdminOrderController::class,'orderListIndex'])->name('orderlist.view');
 
 //admin category list//
 Route::get('admin/category', [adminCategoryController::class, 'index'])->name('adminCategory.view');

@@ -53,6 +53,11 @@
                     @empty
                         <tr>
                             <td>No Data Available</td>
+                            <td>No Data Available</td>
+                            <td>No Data Available</td>
+                            <td>No Data Available</td>
+                            <td>No Data Available</td>
+                            <td>No Data Available</td>
                         </tr>
                     @endforelse
                 </tbody>

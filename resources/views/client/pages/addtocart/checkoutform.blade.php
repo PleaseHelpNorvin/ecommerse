@@ -2,26 +2,54 @@
 @section('main')
 <div class="wrapper">
     <div class="checkoutform-container">
+        
         <form action="{{ route('clientOrder.add', ['username' => $username]) }}" method="POST">
             @csrf
-            <input type="text" name="costumer_id" id="" value="{{$clientUser->id}}"><br>
-            {{-- @foreach ($checkouts as $checkout)
-                <input type="text" name="check_out_id[]" id="" value="{{$checkout->id}}">
-            @endforeach --}}
+            <div class="checkoutform-group">
+                <label for="">Client id</label>
+                <input type="text" name="customer_id" value="{{ $clientUser->id }}">
+                @error('customer_id')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+            
+            <!-- Assuming $checkouts contains a single checkout -->
+            {{-- @foreach ($checkouts as $checkout) --}}
+                {{-- <input type="text" name="check_out_id" value="{{ $checkout->id }}"> --}}
+                {{-- <input type="text" name="check_out_product_id" value="{{ $checkout->product_id }}"> --}}
+            {{-- @endforeach --}}
+            <div class="checkoutform-group">
+                <label for="order_number">Order Number:</label>
+                <input type="text" name="order_number" value="{{$orderNumber}}" readonly>
+            </div>
+            <div class="checkoutform-group">
+                <label for="order_quantity_by_product">Order Quantity By Product:</label>
+                <input type="text" name="order_quantity_by_product" value="{{$countItem}}">
+            </div>
+            <div class="checkoutform-group">
+                <label for="order_product_id">Order Product Ids</label>
+                @foreach ($checkouts as $checkout)
+                    <input type="text" name="order_product_id[]" value="{{$checkout->product_id }}">
+                @endforeach
+                @error('order_product_id[]')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            </div>
+            
             <div class="checkoutform-group">
                 <label for="fullname">Fullname:</label>
                 <input type="text" name="fullname" value="{{ $clientUser->fullname }}" id="fullname" readonly>
             </div>
             <div class="checkoutform-group">
                 <label for="address">Address:</label>
-                <input type="text" name="address" id="address" >
+                <input type="text" name="address" id="address">
                 @error('address')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="checkoutform-group">
                 <label for="mode_of_payment">Mode of Payment:</label>
-                <select name="mode_of_payment" id="mode_of_payment" >
+                <select name="mode_of_payment" id="mode_of_payment">
                     <option value="">Select Mode of Payment</option>
                     <option value="Gcash">Gcash</option>
                     <option value="COD">COD</option>
@@ -41,7 +69,6 @@
         </form>
     </div>
 </div>
-
 
     <style>
         .dropdown-content {

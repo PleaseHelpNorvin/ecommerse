@@ -737,7 +737,39 @@
         /* border: solid black; */
         padding: 20px
     }
-
+    .orderlist-header{
+        background: #41c1ba;
+        /* border: 1px solid black; */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        width: calc(100%-3px);
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        color: #fcfcfb;
+    }
+    .orderlist-image-divider,
+    .orderlist-name-divider,
+    .orderlist-color-divider,
+    .orderlist-price-divider,
+    .orderlist-checkquantity-divider,
+    .orderlist-total-divider
+    {
+        /* border: 1px solid black; */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .orderlist-image-divider p,
+    .orderlist-name-divider p,
+    .orderlist-color-divider p,
+    .orderlist-price-divider p,
+    .orderlist-checkquantity-divider p,
+    .orderlist-total-divider p{
+        font-weight: bold;
+    }
     .orderlist-container{
         /* border:1px solid black; */
         border-radius: 5px;
@@ -789,6 +821,7 @@
     .name-container,
     .color-container,
     .price-container,
+    .productprice-container,
     .quantity-container{
         /* border:1px solid black; */
         width: 100%;

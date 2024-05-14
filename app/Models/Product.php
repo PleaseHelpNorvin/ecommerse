@@ -14,7 +14,7 @@ class Product extends Model
         'description',
         'category_id',
         'color_id',
-        'stockQuantity',
+        // 'stockQuantity',
         'price',
         'imagePath'
     ];
