@@ -5,41 +5,44 @@
         
         <form action="{{ route('clientOrder.add', ['username' => $username]) }}" method="POST">
             @csrf
-            <div class="checkoutform-group">
-                <label for="">Client id</label>
-                <input type="text" name="customer_id" value="{{ $clientUser->id }}">
+            {{-- <div class="checkoutform-group"> --}}
+                {{-- <label for="">Client id</label> --}}
+                <input type="hidden" name="customer_id" value="{{ $clientUser->id }}">
                 @error('customer_id')
                     <div class="error">{{ $message }}</div>
                 @enderror
-            </div>
-            
-            <!-- Assuming $checkouts contains a single checkout -->
-            {{-- @foreach ($checkouts as $checkout) --}}
-                {{-- <input type="text" name="check_out_id" value="{{ $checkout->id }}"> --}}
-                {{-- <input type="text" name="check_out_product_id" value="{{ $checkout->product_id }}"> --}}
-            {{-- @endforeach --}}
-            <div class="checkoutform-group">
-                <label for="order_number">Order Number:</label>
-                <input type="text" name="order_number" value="{{$orderNumber}}" readonly>
-            </div>
-            <div class="checkoutform-group">
-                <label for="order_quantity_by_product">Order Quantity By Product:</label>
-                <input type="text" name="order_quantity_by_product" value="{{$countItem}}">
-            </div>
-            <div class="checkoutform-group">
-                <label for="order_product_id">Order Product Ids</label>
+            {{-- </div> --}}
+            {{-- <div class="checkoutform-group"> --}}
+                {{-- <label for="order_number">Order Number:</label> --}}
+                <input type="hidden" name="order_number" value="{{$orderNumber}}" readonly>
+            {{-- </div> --}}
+            {{-- <div class="checkoutform-group" hidden> --}}
+                {{-- <label for="order_quantity_by_product">Order Quantity By Product:</label> --}}
+                <input type="hidden" name="order_quantity_by_product" value="{{$countItem}}">
+            {{-- </div> --}}
+            {{-- <div class="checkoutform-group"> --}}
+                {{-- <label for="order_product_id">Order Product Ids</label> --}}
                 @foreach ($checkouts as $checkout)
-                    <input type="text" name="order_product_id[]" value="{{$checkout->product_id }}">
+                    <input type="hidden" name="order_product_id[]" value="{{$checkout->product_id }}">
                 @endforeach
                 @error('order_product_id[]')
                     <div class="error">{{ $message }}</div>
                 @enderror
-            </div>
+            {{-- </div> --}}
+            {{-- <div class="checkoutform-group"> --}}
+                {{-- <label for="order_product_id">Ordered Product Quantity</label> --}}
+                @foreach ($checkouts as $checkout)
+                    <input type="hidden" name="order_product_quantity[]" value="{{$checkout->quantity }}">
+                @endforeach
+                @error('order_product_quantity[]')
+                    <div class="error">{{ $message }}</div>
+                @enderror
+            {{-- </div> --}}
             
-            <div class="checkoutform-group">
-                <label for="fullname">Fullname:</label>
-                <input type="text" name="fullname" value="{{ $clientUser->fullname }}" id="fullname" readonly>
-            </div>
+            {{-- <div class="checkoutform-group"> --}}
+                {{-- <label for="fullname">Fullname:</label> --}}
+                <input type="hidden" name="fullname" value="{{ $clientUser->fullname }}" id="fullname" readonly>
+            {{-- </div> --}}
             <div class="checkoutform-group">
                 <label for="address">Address:</label>
                 <input type="text" name="address" id="address">

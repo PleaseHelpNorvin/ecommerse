@@ -18,8 +18,8 @@
                     <h3 class="product-name">{{$products->productName}}</h3>
                     <h4 class="product-price"><small>₱</small>{{ number_format($products->price, 2, '.', ',') }}</h4>
                     <p class="product-desc">{{$products->description}}</p>
-                    <h5 class="product-color-h5">Color</h5>
-                    <div class="product-color">
+                    {{-- <h5 class="product-color-h5">Color</h5> --}}
+                    {{-- <div class="product-color">
                         <div class="dropdown">
                             <input type="text" name="product-color" class="dropdown-input" readonly placeholder="Please Select Color">
                             <div class="dropdown-content" id="dropdown">
@@ -28,7 +28,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <h5 class="product-number">Quantity</h5>
                     <div class="product-add">
                         <span class="decrement">-</span>

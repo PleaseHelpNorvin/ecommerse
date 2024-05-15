@@ -12,9 +12,9 @@
         <div class="orderlist-name-divider">
             <p>Name</p>
         </div>
-        <div class="orderlist-color-divider">
+        {{-- <div class="orderlist-color-divider">
             <p>Color</p>
-        </div>
+        </div> --}}
         <div class="orderlist-price-divider">
             <p>price</p>
         </div>
@@ -35,21 +35,21 @@
                 <div class="name-container">
                     <p>{{ $orderItem->productName }}</p>
                 </div>
-                <div class="color-container">
+                {{-- <div class="color-container">
                     <!-- Assuming you have a field for the color in your $orderItem -->
                     <p>{{ $orderItem->checkout_color }}</p>
-                </div>
+                </div> --}}
                 <div class="productprice-container">
                     <!-- Assuming you have a field for the quantity in your $orderItem -->
                     <p><small>₱</small>{{ number_format($orderItem->price, 2, '.', ',') }}</p>
                 </div>
                 <div class="quantity-container">
                     <!-- Assuming you have a field for the quantity in your $orderItem -->
-                    <p>{{ $orderItem->quantity }}</p>
+                    <p>{{ $orderItem->order_product_quantity }}</p>
                 </div>
                 <div class="price-container">
                     <!-- Assuming you have a field for the price in your $orderItem -->
-                    <p><small>₱</small>{{ number_format($orderItem->price * $orderItem->quantity, 2, '.', ',') }}</p>
+                    <p><small>₱</small>{{ number_format($orderItem->price * $orderItem->order_product_quantity, 2, '.', ',') }}</p>
                 </div>
             </div>
         @endforeach

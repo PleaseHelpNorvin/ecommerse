@@ -12,7 +12,8 @@ class CheckOut extends Model
     protected $fillable = [
         "clientuser_id",
         "product_id ",
-        "color"
+        // "color"
+        "quantity"
     ];
 
     public function product()

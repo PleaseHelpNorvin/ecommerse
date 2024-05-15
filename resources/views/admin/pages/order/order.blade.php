@@ -3,20 +3,21 @@
 @section('main-container')
     <div class="page-wrapper">
         <div class="page-search-container">
-            <form action="">
-                <input type="text">
+            <form action="{{route('order.search')}}" method="GET">
+                @csrf
+                <input type="search" name="search-order" placeholder="Search Order">
                 <button>
                     <span class="material-symbols-outlined">
                         search
-                    </span>
+                        </span>
                 </button>
             </form>
         </div>
         <div class="order-nav">
-            <a href="">All</a>
-            <a href="">Paid</a>
-            <a href="">Pending</a>
-            <a href="">Cancelled</a>
+            <a href="{{ route('adminOrder.view') }}">All</a>
+            <a href="{{ route('adminOrder.view', ['status' => 'Paid']) }}">Paid</a>
+            <a href="{{ route('adminOrder.view', ['status' => 'Pending']) }}">Pending</a>
+            <a href="{{ route('adminOrder.view', ['status' => 'Cancelled']) }}">Cancelled</a>
         </div>
         <div class="table-container">
             <table class="table">
@@ -53,19 +54,23 @@
                                     </button>
                                 </a>
 
-                                <a href="">
-                                    <button class="btn-edit">
+                                <form action="{{ route('order.updateStatus', ['orderNumber' => $order->order_number]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn-edit">
                                         <span class="material-symbols-outlined">
                                             done
                                         </span>
                                     </button>
-                                </a>
-
-                                <button class="btn-delete">
-                                    <span class="material-symbols-outlined">
-                                        cancel
-                                    </span>
-                                </button>
+                                </form>
+                                
+                                <form action="{{ route('order.cancel', ['orderNumber' => $order->order_number]) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn-delete">
+                                        <span class="material-symbols-outlined">
+                                            cancel
+                                        </span>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

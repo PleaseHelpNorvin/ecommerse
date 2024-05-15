@@ -66,7 +66,12 @@ Route::get('admin/dashboard',[adminDashboardController::class, 'index'])->name('
 
 //orderlist//
 Route::get('admin/order', [adminOrderController::class, 'index'])->name('adminOrder.view');
-Route::get('admin/orderlist/{clientId}/{orderRanNum}', [AdminOrderController::class,'orderListIndex'])->name('orderlist.view');
+Route::get('admin/orderlist/{clientId}/{orderRanNum}', [adminOrderController::class,'orderListIndex'])->name('orderlist.view');
+Route::post('/order/update/{orderNumber}', [adminOrderController::class, 'updateStatus'])->name('order.updateStatus');
+Route::post('/order/cancel/{orderNumber}', [adminOrderController::class, 'cancelOrder'])->name('order.cancel');
+Route::get('admin/order/search-order', [adminOrderController::class, 'orderSearch'])->name('order.search');
+
+
 
 //admin category list//
 Route::get('admin/category', [adminCategoryController::class, 'index'])->name('adminCategory.view');

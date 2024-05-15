@@ -27,6 +27,7 @@ class Order extends Model
         'fullname',
         'order_quantity_by_product',
         'order_product_id',
+        'order_product_quantity',
         'order_number',
         'status',
         'total',

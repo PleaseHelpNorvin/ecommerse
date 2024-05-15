@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('order_quantity_by_product');
             // $table->unsignedBigInteger('order_product_id');
             $table->string('order_product_id');
+            $table->integer('order_product_quantity');
             $table->string('status')->default('Pending');
             $table->decimal('total', 10, 2);
             $table->string('address');

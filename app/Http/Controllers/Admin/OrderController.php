@@ -14,28 +14,63 @@ class OrderController extends Controller
 {
     //
     public function index(Request $request) {
+        // $orders = Order::groupBy('order_number')->get();
+        $status = $request->query('status'); // Get the status query parameter
 
-        $orders = Order::groupBy('order_number')
-        ->get();
-
+        if ($status) {
+            $orders = Order::where('status', $status)->groupBy('order_number')->get();
+        } else {
+            $orders = Order::groupBy('order_number')->get();
+        }
         return view('admin.pages.order.order', compact('orders'));
     }
     public function orderListIndex($clientId,$orderRanNum){
-
-        $orderItems = Order::select('order.id as order_id', 'order.order_number', 'order.created_at', 'order.status',
-                    'products.productName as productName', 'products.imagePath as imagePath','check_out_history.quantity',
-                    'products.price', 'order.order_quantity_by_product','order.total',
-                    'check_out_history.color as checkout_color')
-            ->leftJoin('products', 'order.order_product_id', '=', 'products.id')
-            ->leftJoin('check_out_history', function($join) {
-            $join->on('order.order_product_id', '=', 'check_out_history.product_id')
-                    ->on('order.customer_id', '=', 'check_out_history.clientuser_id');
-                })
-                ->leftJoin('client_user', 'order.customer_id', '=', 'client_user.id')
-                ->where('order.customer_id', '=', $clientId)
-                ->where('order.order_number', '=', $orderRanNum)
-                ->get();
-            
+        $orderItems = Order::select('order.*','products.*')
+        ->leftJoin('products', 'order.order_product_id', '=', 'products.id')
+        ->leftJoin('client_user','order.customer_id', '=', 'client_user.id')
+            ->where('order.customer_id', '=', $clientId)
+            ->where('order.order_number', '=', $orderRanNum)
+            ->get();
         return view('admin.pages.order.orderlist', compact('orderItems'));
+    }
+
+    public function updateStatus(Request $request, $orderNumber){
+        $orders = Order::where('order_number', $orderNumber)->get();
+    
+        foreach ($orders as $order) {
+            $order->status = 'Paid';
+            $order->save();
+        }
+    
+        return redirect()->back()->with('success', 'Order status updated to Paid.');
+    }
+    
+    public function cancelOrder(Request $request, $orderNumber){
+        $orders = Order::where('order_number', $orderNumber)->get();
+    
+        foreach ($orders as $order) {
+            $order->status = 'Cancelled';
+            $order->save();
+        }
+    
+        return redirect()->back()->with('success', 'Order status updated to Cancelled.');
+    }
+
+    public function orderSearch(Request $request){
+        $searchQuery = $request->input('search-order');
+
+        $orders = Order::where('fullname', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('order_number', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('order_quantity_by_product', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('created_at', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('order_product_quantity', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('status', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('total', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('address', 'LIKE', '%' . $searchQuery . '%')
+                        ->orWhere('mop', 'LIKE', '%' . $searchQuery . '%')
+                        ->groupBy('order_number')
+                            ->paginate(0);
+
+        return view('admin.pages.order.order', compact('orders'));
     }
 }

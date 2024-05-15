@@ -99,8 +99,8 @@ class ProductController extends Controller
 
     public function productSearch(Request $request){
         $searchQuery = $request->input('search-product');
-        $products = Product::select('products.*', 'category.categoryName', 'product_color.name')
-            ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
+        $products = Product::select('products.*', 'category.categoryName')
+            // ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
             ->leftJoin('category', 'products.category_id', '=', 'category.id')
             ->where(function($query) use ($searchQuery) {
             $query->where('products.productName', 'LIKE', '%' . $searchQuery . '%')
