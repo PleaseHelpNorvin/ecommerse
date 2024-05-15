@@ -41,7 +41,7 @@
                 </div>
                 <div class="productprice-container">
                     <!-- Assuming you have a field for the quantity in your $orderItem -->
-                    <p>{{ $orderItem->price }}</p>
+                    <p><small>₱</small>{{ number_format($orderItem->price, 2, '.', ',') }}</p>
                 </div>
                 <div class="quantity-container">
                     <!-- Assuming you have a field for the quantity in your $orderItem -->
@@ -49,7 +49,7 @@
                 </div>
                 <div class="price-container">
                     <!-- Assuming you have a field for the price in your $orderItem -->
-                    <p>{{ $orderItem->price }}</p>
+                    <p><small>₱</small>{{ number_format($orderItem->price * $orderItem->quantity, 2, '.', ',') }}</p>
                 </div>
             </div>
         @endforeach

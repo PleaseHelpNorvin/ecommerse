@@ -16,7 +16,7 @@
                     <input type="hidden" name="product_id" value="{{ $products->id }}">
 
                     <h3 class="product-name">{{$products->productName}}</h3>
-                    <h4 class="product-price"><small>₱</small>{{$products->price}}</h4>
+                    <h4 class="product-price"><small>₱</small>{{ number_format($products->price, 2, '.', ',') }}</h4>
                     <p class="product-desc">{{$products->description}}</p>
                     <h5 class="product-color-h5">Color</h5>
                     <div class="product-color">

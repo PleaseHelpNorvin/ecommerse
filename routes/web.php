@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\VoucherController as adminVoucherController;
 use App\Http\Controllers\Admin\CategoryController as adminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as adminDashboardController;
 use App\Http\Controllers\Admin\ProductColorController as adminProductColorController;
+use App\Http\Controllers\Admin\DeliveryController as adminDeliveryController;
+
 
 
 
@@ -96,3 +98,6 @@ Route::get('admin/color/search-color', [adminProductColorController::class, 'col
 // admin client user list//
 Route::get('admin/user', [adminUserController::class, 'index'])->name('adminUser.view');
 Route::get('admin/user/search-user', [adminUserController::class, 'userSearch'])->name('user.search');
+
+//admin delivery//
+Route::get('admin/delivery',[adminDeliveryController::class, 'index'])->name('adminDelivery.view');

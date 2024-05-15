@@ -47,13 +47,15 @@
                                 </div>
                                 <div class="back">
                                     <div class="unitPrice-container">
-                                        <p><small>₱</small>{{ $checkout->product->price }}</p>
+                                        <p><small>₱</small>{{ number_format( $checkout->product->price, 2, '.', ',') }}</p>
+
+                                        {{-- <p><small>₱</small>{{ $checkout->product->price }}</p> --}}
                                     </div>
                                     <div class="Quanity-container">
                                         <p>{{ $checkout->quantity }}</p>
                                     </div>
                                     <div class="totalPrice-container">
-                                        <p><small>₱</small>{{ $checkout->item_total_price }}</p>
+                                        <p><small>₱</small>{{ number_format($checkout->item_total_price, 2, '.', ',') }}</p>
                                     </div>
                                     <div class="Actions-container">
                                         <form action="{{ route('checkout.delete', ['username' => $username, 'check_out_id' => $checkout->id]) }}" method="POST">
@@ -81,13 +83,13 @@
                             <div class="product-item-container">
                                 {{-- <input type="text" name="product_id" value="{{ $checkout->id }}" hidden> --}}
                                 <div class="unitPrice-container">
-                                    <p><small>₱</small>{{ $checkout->product->price }}</p>
+                                    <p><small>₱</small>{{ number_format($checkout->product->price, 2, '.', ',') }}</p>
                                 </div>
                                 <div class="Quanity-container">
                                     <p>{{ $checkout->quantity }}</p>
                                 </div>
                                 <div class="totalPrice-container">
-                                    <p><small>₱</small>{{ $checkout->item_total_price }}</p>
+                                    <p><small>₱</small>{{ number_format($checkout->item_total_price, 2, '.', ',') }}</p>
                                 </div>
                                 <div class="Actions-container">
                                     <form action="{{ route('checkout.delete', ['username' => $username, 'check_out_id' => $checkout->id]) }}" method="POST">
@@ -106,7 +108,7 @@
                 <div class="cart-footer-footer">
                     {{-- <form action="#"> --}}
 
-                        <p>Total({{$countItem}} Item): ₱{{$totalPrice}}</p>
+                        <p>Total ({{ $countItem }} Item): ₱{{ number_format($totalPrice, 2, '.', ',') }}</p>
                         <button type="submit" class="check-out-a">
                             <a href="{{route('checkoutform.view', ['username'=>$username])}}" class="check-out-a">
                                 <div class="check-out">

@@ -41,7 +41,7 @@
                             <td>{{$order->order_quantity_by_product}} </td>
                             <td>{{ $order->mop }}</td>
                             <td>{{ $order->status }}</td>
-                            <td>${{ $order->total }}</td>
+                            <td>₱{{ number_format($order->total, 2, '.', ',') }}</td>
                             <td>
                                 <a href="{{ route('orderlist.view', ['clientId' => $order->customer_id, 'orderRanNum' => $order->order_number]) }}">
                                     {{-- {{dd(route('orderlist.view', $order->id,$order->order_number))}} --}}

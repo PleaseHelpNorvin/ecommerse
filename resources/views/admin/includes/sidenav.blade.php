@@ -10,15 +10,15 @@
             Dashboard
         </a>
     </div>
-    <div class="sidenav-content {{ Request::route()->named('adminOrder.view') ? 'active' : '' }}">
-        <a href="{{ route('adminOrder.view') }}">
+    <div class="sidenav-content {{ Request::route()->named('adminDelivery.view') ? 'active' : '' }}">
+        <a href="{{ route('adminDelivery.view') }}">
             <span class="material-symbols-outlined">
                 local_shipping
             </span>
             Deliver
         </a>
     </div>
-    <div class="sidenav-content {{ Request::route()->named('adminOrder.view') ? 'active' : '' }}">
+    <div class="sidenav-content {{ Request::route()->named('adminOrder.view') || Request::route()->named('orderlist.view')  ? 'active' : '' }}">
         <a href="{{ route('adminOrder.view') }}">
             <span class="material-symbols-outlined">
                 orders
@@ -27,22 +27,21 @@
         </a>
     </div>
     <div class="sidenav-content-slide-container ">
-        <div class="slide-head-container {{ Request::route()->named('adminCode.view') || Request::route()->named('adminCategory.view') || Request::route()->named('adminProduct.view') || Request::route()->named('adminCategoryForm.view') || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
-            <span class="material-symbols-outlined">
-                pages
-            </span>
-            <p>Pages</p>
+        <div class="slide-head-container {{ Request::route()->named('adminCode.view')
+            || Request::route()->named('adminCategory.view')
+            || Request::route()->named('adminProduct.view')
+            || Request::route()->named('adminCategoryForm.view')
+            || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
+                <span class="material-symbols-outlined">
+                    pages
+                </span>
+                <p>Pages</p>
         </div>
-        <div class="slide-body-container {{ Request::route()->named('adminCode.view') || Request::route()->named('adminCategory.view') || Request::route()->named('adminProduct.view') || Request::route()->named('adminCategoryForm.view') || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
-            {{-- <div class="slide-wrapper {{ Request::route()->named('adminVoucher.view') ? 'active' : '' }}" >
-                <div class=slide-line></div>
-                <a href="{{ route('adminVoucher.view') }}">
-                    <span class="material-symbols-outlined">
-                        redeem
-                    </span>
-                    Vouchers
-                </a>
-            </div> --}}
+        <div class="slide-body-container {{ Request::route()->named('adminCode.view')
+                || Request::route()->named('adminCategory.view')
+                || Request::route()->named('adminProduct.view')
+                || Request::route()->named('adminCategoryForm.view')
+                || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
             <div class="slide-wrapper {{ Request::route()->named('adminCategory.view','adminCategoryForm.view') ? 'active' : '' }}">
                 <div class=slide-line><span></span></div>
                 <a href="{{ route('adminCategory.view')}}">
