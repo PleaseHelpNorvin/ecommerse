@@ -25,13 +25,17 @@ class OrderController extends Controller
         return view('admin.pages.order.order', compact('orders'));
     }
     public function orderListIndex($clientId,$orderRanNum){
+        $orderfullname = Order::where('customer_id', $clientId)
+        ->where('order_number', $orderRanNum)
+        ->first();
+
         $orderItems = Order::select('order.*','products.*')
         ->leftJoin('products', 'order.order_product_id', '=', 'products.id')
         ->leftJoin('client_user','order.customer_id', '=', 'client_user.id')
             ->where('order.customer_id', '=', $clientId)
             ->where('order.order_number', '=', $orderRanNum)
             ->get();
-        return view('admin.pages.order.orderlist', compact('orderItems'));
+        return view('admin.pages.order.orderlist', compact('orderItems','orderfullname'));
     }
 
     public function updateStatus(Request $request, $orderNumber){

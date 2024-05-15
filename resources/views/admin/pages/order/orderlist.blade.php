@@ -3,7 +3,7 @@
 <div class="page-wrapper">
     <div class="page-head-container">
         <a href="{{ route('adminOrder.view') }}" class="page-btn">Back</a>
-        <h5>User's Checked Out Items</h5>
+        <h5>{{$orderfullname->fullname}}'s Checked Out Items</h5>
     </div>
     <div class="orderlist-header">
         <div class="orderlist-image-divider">
