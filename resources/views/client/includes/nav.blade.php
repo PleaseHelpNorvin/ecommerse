@@ -61,6 +61,10 @@
             </span>Add to Cart
         </a>
     </li>
+    <li><a href="{{ route('clientorder.view', ['username' => $username]) }}"><span class="material-symbols-outlined">
+        shopping_bag
+        </span>Orders</a>
+    </li>
     {{-- <li><a href=""><span class="material-symbols-outlined">
                 settings
             </span>Settings</a>
