@@ -40,6 +40,7 @@
                         code
                     </span>
                     Codes
+                    
                 </a>
             </div> --}}
             <div class="slide-wrapper {{ Request::route()->named('adminCategory.view') ? 'active' : '' }}">
