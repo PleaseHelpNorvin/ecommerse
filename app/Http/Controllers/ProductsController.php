@@ -18,14 +18,17 @@ class ProductsController extends Controller
         $clientUser = ClientUser::where('username', $request->username)->first();
         $username = $clientUser->username;
         $products = Product::findOrFail($productId);
-        $colors = Color::all();
+        // $productsall = Ca::all();
+        // dd($productsall);
+
+        // $colors = Color::all();
         // $productjoined = Product::select('products.*', 'category.categoryName', 'product_color.name')
         //                 ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
         //                 ->leftJoin('category', 'products.category_id', '=', 'category.id')
         //                 // ->where('products.id', $productId)
         //                 ->simplePaginate(4);
         // dd($products);
-        return view('client.pages.dashboard.products',compact('username','products','colors'));
+        return view('client.pages.dashboard.products',compact('username','products'));
     }
 
     

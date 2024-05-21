@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $username = $clientUser->username;
         $categories = Category::all();
         $products = Product::all();
+        // dd($categories);
         return view('client.pages.dashboard.dashboard',compact('username','categories','products'));
     }
 
@@ -37,14 +38,14 @@ class DashboardController extends Controller
         $categories = Category::all();
         $searchQuery = $request->input('dashboard-search');
         
-        $products = Product::select('products.*', 'category.categoryName', 'product_color.name')
-        ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
+        $products = Product::select('products.*', 'category.categoryName')
+        // ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
         ->leftJoin('category', 'products.category_id', '=', 'category.id')
         ->where(function ($query) use ($searchQuery) {
             $query->where('products.productName', 'like', "%$searchQuery%")
                 ->orWhere('products.description', 'like', "%$searchQuery%")
-                ->orWhere('category.categoryName', 'like', "%$searchQuery%")
-                ->orWhere('product_color.name', 'like', "%$searchQuery%");
+                ->orWhere('category.categoryName', 'like', "%$searchQuery%");
+                // ->orWhere('product_color.name', 'like', "%$searchQuery%");
         })
         ->simplePaginate(0);
     

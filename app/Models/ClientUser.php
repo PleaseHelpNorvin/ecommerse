@@ -15,5 +15,6 @@ class ClientUser extends Model
         'email',
         'fullname',
         'phonenumber'
+        // 'imagePath'
     ];
 }

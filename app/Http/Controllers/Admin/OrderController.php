@@ -24,11 +24,11 @@ class OrderController extends Controller
         }
         return view('admin.pages.order.order', compact('orders'));
     }
+
     public function orderListIndex($clientId,$orderRanNum){
         $orderfullname = Order::where('customer_id', $clientId)
         ->where('order_number', $orderRanNum)
         ->first();
-
         $orderItems = Order::select('order.*','products.*')
         ->leftJoin('products', 'order.order_product_id', '=', 'products.id')
         ->leftJoin('client_user','order.customer_id', '=', 'client_user.id')
@@ -40,9 +40,8 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request, $orderNumber){
         $orders = Order::where('order_number', $orderNumber)->get();
-    
         foreach ($orders as $order) {
-            $order->status = 'Paid';
+            $order->status = 'Paid' ;
             $order->save();
         }
     

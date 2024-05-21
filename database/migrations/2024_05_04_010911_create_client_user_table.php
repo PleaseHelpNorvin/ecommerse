@@ -19,6 +19,7 @@ return new class extends Migration
             $table->String('fullname');
             $table->bigInteger('phonenumber');
             // $table->String('status');
+            // $table->string('imagePath')->nullable();
             $table->timestamps();
         });
     }

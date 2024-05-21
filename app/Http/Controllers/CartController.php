@@ -4,26 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\CheckOut;
-use App\Models\ClientUser;
 // use App\Models\OrderHistory;
-use Illuminate\Support\Str;
+use App\Models\ClientUser;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\CheckOutHistory;
 
 class CartController extends Controller
 {
     //
-    public function index(Request $request){
+    public function index(Request $request, $username){
         $clientUser = ClientUser::where('username', $request->username)->firstOrFail();
-        $username = $clientUser->username;
+        // $username = $clientUser->username;
+        $categories = Category::all();
         $checkouts = CheckOut::with('product')
                         ->byClientUser($clientUser->id)
                         ->get();
         $totalPrice = CheckOut::where('clientuser_id', $clientUser->id)->sum('item_total_price');
         $countItem = Checkout::where('clientuser_id',$clientUser->id)->count('id');
-        return view('client.pages.addtocart.cart', compact('username', 'checkouts','totalPrice','countItem'));
+        return view('client.pages.addtocart.cart', compact('username', 'checkouts','totalPrice','countItem','categories'));
     }
 
     public function checkOutPost(Request $request, $username) {
@@ -118,6 +120,5 @@ class CartController extends Controller
     }
 
     
-        
     
 }

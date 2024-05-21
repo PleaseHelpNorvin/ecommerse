@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class
         ]);
         $this->call([
-            ProductColorsTableSeeder::class
+            CategoriesTableSeeder::class,
+            ProductsTableSeeder::class,
         ]);
         
     }

@@ -3,39 +3,44 @@
     <div class="page-wrapper">
         <div class="card-wrapper">
             <div class="count-card-div">
-                User Count
+                <p>Products Counts</p>
+
+                <p>{{$countProducts}}</p>
             </div>
             <div class="count-card-div">
-                Order Count
+                <p>Orders Counts</p>
+                
+                <p>{{$countOrders}}</p>
             </div>
             <div class="count-card-div">
-                User 
+                <p>Categories Count</p>
+                <p>{{$countCategory}}</p>
             </div>
             <div class="count-card-div">
-                User 
+                <p>Users Counts</p>
+                
+                <p>{{$countClientUser}}</p>
             </div>
         </div>
-        <div class="dashboard-content-container">
-            {{-- <div class="chart-wrapper"> --}}
-                <div class="chart-container">
-                    pie chart
-                </div>
-                <div class="chart-container">
-                    pie chart
-                </div>
-                <div class="chart-container">
-                    pie chart
-                </div>
-                <div class="chart-container">
-                    pie chart
-                </div>
-                <div class="chart-container">
-                    pie chart
-                </div>
-                <div class="chart-container">
-                    pie chart
-                </div>
-            {{-- </div> --}}
-        </div>
+        {{-- <div class="dashboard-content-container">
+            <div class="chart-container">
+                pie chart
+            </div>
+            <div class="chart-container">
+                pie chart
+            </div>
+            <div class="chart-container">
+                pie chart
+            </div>
+            <div class="chart-container">
+                pie chart
+            </div>
+            <div class="chart-container">
+                pie chart
+            </div>
+            <div class="chart-container">
+                pie chart
+            </div>
+        </div> --}}
     </div>
 @endsection

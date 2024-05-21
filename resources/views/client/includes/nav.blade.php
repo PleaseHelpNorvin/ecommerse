@@ -1,5 +1,5 @@
 <div class="profile-circular-image">
-    <img src="{{ asset('roldan.png') }}" alt="Profile Image">
+    <img src="{{ asset('roldan.png') }}" alt="{{ asset('roldan.png') }}">
     <div class="profile-text">
         <h1>Welcome,</h1>
         <p>{{$username}}</p>
@@ -11,28 +11,27 @@
 
 <div class="search-container">
     @if (Route::currentRouteNamed('cart.view'))
-        <div class="cart-head-dropdown" style="">
-            <button class="cart-head-dropdown-btn" id="cart-head-dropdown-btn">Categories dropdown 1</button>
-            <div class="cart-head-dropdown-content">
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
-                <p>tasdasd</p>
+        <div class="cart-head-dropdown" style="display:none">
+            <input class="cart-head-dropdown-btn" type="text" id="categoryInput" placeholder="Select a category" readonly>
+            <div class="cart-head-dropdown-content" id="dropdownContent">
+                <a href="#" data-value="All">All</a>
+                @foreach ($categories as $category)
+                    <a href="#" data-value="{{ $category->categoryName }}">{{ $category->categoryName }}</a>
+                @endforeach
             </div>
         </div>
-        <div class="cart-head-dropdown" style="">
-            <button class="cart-head-dropdown-btn" id="cart-head-dropdown-btn">Item dropdown 2</button>
-            <div class="cart-head-dropdown-content">
-                test2
+        <div class="cart-head-dropdown" style="display:none">
+            <input class="cart-head-dropdown-btn" type="text" id="checkedItemInput" placeholder="Select a CheckedItem" readonly>
+            <div class="cart-head-dropdown-content" id="dropdownContent">
+                <a href="" data-value="all">All</a>
+                @foreach($checkouts as $checkout)
+                    <a href="#" data-value={{$checkout->id}}>{{ $checkout->product->productName }}</a>
+                @endforeach
             </div>
         </div>
     @else
         <div class="search-input-container">
-            <form action="{{ route('dashboard.search', ['username' => $username ]) }}" method="GET">                
+            <form action="{{ route('dashboard.search', ['username' => $username ]) }}" method="GET">
                 @csrf
                 <div class="search">
                     <input class="search-input" type="text" name="dashboard-search" placeholder="Search">
@@ -98,7 +97,7 @@
             </span>
             <p>Profile</p>
             <div class="profile-dropdown-content">
-                <a href="">
+                <a href="{{route('clientprofile.view',['username' => $username])}}">
                     <span class="material-symbols-outlined">
                         edit
                     </span>
@@ -138,3 +137,28 @@ window.onclick = function(event) {
     }
 }
 </script>
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.cart-head-dropdown-content a').forEach(function(el) {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                let dropdown = this.closest('.cart-head-dropdown');
+                let input = dropdown.querySelector('.cart-head-dropdown-btn');
+                input.value = this.textContent;
+                input.setAttribute('data-value', this.getAttribute('data-value'));
+    
+                // Trigger the search/filter function
+                filterItems();
+            });
+        });
+    });
+    
+    function filterItems() {
+        let category = document.getElementById('categoryInput').getAttribute('data-value');
+        let checkedItem = document.getElementById('checkedItemInput').getAttribute('data-value');
+        
+        // Redirect or fetch filtered results
+        window.location.href = `?category=${category}&checkedItem=${checkedItem}`;
+    }
+    </script> --}}

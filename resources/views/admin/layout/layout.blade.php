@@ -560,6 +560,9 @@
         border-radius: 10px;
         /* padding: 0 10px 0 10px; */
     }
+    .order-nav a:hover{
+        background: #82ddd9;
+    }
 
     .order-nav a{
         display: flex;
@@ -650,6 +653,7 @@
         border-radius: 5px;
         /* margin: 10px; */
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         /* box-shadow: #000000; */

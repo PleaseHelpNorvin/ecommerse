@@ -10,14 +10,14 @@
             Dashboard
         </a>
     </div>
-    <div class="sidenav-content {{ Request::route()->named('adminDelivery.view') ? 'active' : '' }}">
+    {{-- <div class="sidenav-content {{ Request::route()->named('adminDelivery.view') ? 'active' : '' }}">
         <a href="{{ route('adminDelivery.view') }}">
             <span class="material-symbols-outlined">
                 local_shipping
             </span>
-            Deliver
+            Delivered
         </a>
-    </div>
+    </div> --}}
     <div class="sidenav-content {{ Request::route()->named('adminOrder.view') || Request::route()->named('orderlist.view')  ? 'active' : '' }}">
         <a href="{{ route('adminOrder.view') }}">
             <span class="material-symbols-outlined">
@@ -60,7 +60,7 @@
                     Products
                 </a>
             </div>
-            <div class="slide-wrapper {{ Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
+            {{-- <div class="slide-wrapper {{ Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
                 <div class=slide-line></div>
                 <a href="{{ route('adminProductColor.view')}}">
                     <span class="material-symbols-outlined">
@@ -68,7 +68,7 @@
                     </span>
                     colors
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="second-sidenav-content-slide-container" >

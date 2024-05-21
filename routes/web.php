@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\AdminAuth;
 use App\Http\Controllers\ProductsController;
-//ADMIN
 use App\Http\Controllers\ClientOrderController;
+use App\Http\Controllers\clientProfileController;
+
+//ADMIN
 use App\Http\Controllers\Admin\CodeController as adminCodeController;
 use App\Http\Controllers\Admin\UserController as adminUserController;
 use App\Http\Controllers\Admin\OrderController as adminOrderController;
@@ -15,9 +17,9 @@ use App\Http\Controllers\DashboardController as clientDashboradController;
 use App\Http\Controllers\Admin\ProductController as adminProductController;
 use App\Http\Controllers\Admin\VoucherController as adminVoucherController;
 use App\Http\Controllers\Admin\CategoryController as adminCategoryController;
+use App\Http\Controllers\Admin\DeliveryController as adminDeliveryController;
 use App\Http\Controllers\Admin\DashboardController as adminDashboardController;
 use App\Http\Controllers\Admin\ProductColorController as adminProductColorController;
-use App\Http\Controllers\Admin\DeliveryController as adminDeliveryController;
 
 
 
@@ -29,6 +31,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //client login/register
 Route::get('client/login', [ClientAuth::class, 'loginIndex'])->name('login.view');
 Route::post('client/login-auth', [ClientAuth::class,'loginAuth'])->name('login.auth');
@@ -36,24 +39,28 @@ Route::get('client/register', [ClientAuth::class, 'registerIndex'])->name('regis
 Route::post('client/register-post', [clientAuth::class,'registerPost'])->name('register.post');
 Route::get('client/logout',[clientAuth::class, 'logout'])->name('client.logout');
 
-//client routes
+//client profile//
+Route::get('client/{username}/profile',[clientProfileController::class,'index'])->name('clientprofile.view');
+Route::post('client/{username}/profile-post}', [clientProfileController::class, 'profileUpdate'])->name('editprofile.post');
+//client routes//
 Route::get('client/dashboard/{username}',[clientDashboradController::class, 'index'])->name('dashboard.view');
 Route::get('dashboard/{username}/products/{categoryId}', [clientDashboradController::class, 'showProductsByCategory'])
     ->name('dashboard.showProducts');
 Route::get('admin/{username}/dashboard/search-dashboard', [clientDashboradController::class, 'dashboardSearch'])->name('dashboard.search');
 Route::get('client/{username}/products/{productId}', [ProductsController::class, 'productsIndex'])->name('products.view');
-//client order
+//client carts//
 Route::post('client/order/{username}', [CartController::class, 'clientOrder'])->name('clientOrder.add');
-//client carts
 Route::get('client/cart/{username}',[CartController::class, 'index'])->name('cart.view');
 Route::post('client/check-out/{username}',[CartController::class, 'checkOutPost'])->name('checkout.post');
 Route::delete('/checkout/{username}/delete/{check_out_id}', [CartController::class, 'deleteCheckout'])->name('checkout.delete');
-
 Route::get('client/{username}/check-out/form', [CartController::class, 'checkOutFormIndex'])->name('checkoutform.view');
-
+//client order//
 Route::get('client/{username}/order', [ClientOrderController::class, 'ClientOrder'])->name('clientorder.view');
-// Route::get('client/code',[CartController::class, 'codeIndex'])->name('code.view');
-// Route::get('client/voucher', [CartController::class, 'voucherIndex'])->name('voucher.view');
+Route::get('client/{username}/orderlist/{order}', [ClientOrderController::class, 'clientOrderList'])->name('clientorderlist.view');
+Route::post('client/order/cancel/{orderNumber}', [ClientOrderController::class, 'cancelOrder'])->name('order.cancel');
+
+
+
 
 
 //admin login
@@ -70,8 +77,6 @@ Route::get('admin/orderlist/{clientId}/{orderRanNum}', [adminOrderController::cl
 Route::post('/order/update/{orderNumber}', [adminOrderController::class, 'updateStatus'])->name('order.updateStatus');
 Route::post('/order/cancel/{orderNumber}', [adminOrderController::class, 'cancelOrder'])->name('order.cancel');
 Route::get('admin/order/search-order', [adminOrderController::class, 'orderSearch'])->name('order.search');
-
-
 
 //admin category list//
 Route::get('admin/category', [adminCategoryController::class, 'index'])->name('adminCategory.view');

@@ -17,9 +17,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('category');
-            // $table->unsignedBigInteger('color_id')->nullable();
-            // $table->foreign('color_id')->references('id')->on('product_color');
-            // $table->integer('stockQuantity');
             $table->decimal('price', 8, 2);
             $table->string('imagePath')->nullable();
             $table->timestamps();
