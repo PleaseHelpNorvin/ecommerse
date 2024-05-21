@@ -8,7 +8,10 @@
         </span>
         <a href="{{ route('adminDashboard.view') }}">Dashboard</a>
     </div>
-    <div class="sidenav-content {{ Request::route()->named('adminOrder.view') ? 'active' : '' }}">
+    <div class="sidenav-content {{ Request::route()->named('adminOrder.view')
+    || Request::route()->named('order.search')
+    || Request::route()->named('orderlist.view')
+    ? 'active' : '' }}">
         <span class="material-symbols-outlined">
             orders
         </span>
@@ -17,33 +20,36 @@
     <div class="mobile-sidenav-content-slide-container">
         <div class="horizontal-line"></div> <!-- Horizontal line -->
 
-        <div class="mobile-slide-head-container {{  Request::route()->named('adminCode.view') || Request::route()->named('adminCategory.view') || Request::route()->named('adminProduct.view') ? 'active' : '' }}">
+        <div class="mobile-slide-head-container {{  Request::route()->named('adminCode.view')
+        || Request::route()->named('adminCategory.view')
+        || Request::route()->named('adminProduct.view')
+        || Request::route()->named('editCategoryForm.view')
+        || Request::route()->named('adminCategoryForm.view')
+        || Request::route()->named('category.search')
+        || Request::route()->named('adminProductForm.view')
+        || Request::route()->named('product.search')
+
+
+        ? 'active' : '' }}">
             <span class="material-symbols-outlined">
                 pages
             </span>
             <p>Pages</p>
         </div>
-        <div class="mobile-slide-body-container {{  Request::route()->named('adminCode.view') || Request::route()->named('adminCategory.view') || Request::route()->named('adminProduct.view') ? 'active' : '' }}">
-            {{-- <div class="slide-wrapper {{ Request::route()->named('adminVoucher.view') ? 'active' : '' }}">
-                <div class=slide-line></div>
-                <a href="{{ route('adminVoucher.view') }}">
-                    <span class="material-symbols-outlined">
-                        redeem
-                    </span>
-                    Vouchers
-                </a>
-            </div> --}}
-            {{-- <div class="slide-wrapper {{ Request::route()->named('adminCode.view') ? 'active' : '' }}">
-                <div class=slide-line></div>
-                <a href="{{ route('adminCode.view')}}">
-                    <span class="material-symbols-outlined">
-                        code
-                    </span>
-                    Codes
-                    
-                </a>
-            </div> --}}
-            <div class="slide-wrapper {{ Request::route()->named('adminCategory.view') ? 'active' : '' }}">
+        <div class="mobile-slide-body-container {{  Request::route()->named('adminCode.view')
+        || Request::route()->named('adminCategory.view')
+        || Request::route()->named('adminProduct.view')
+        || Request::route()->named('editCategoryForm.view')
+        || Request::route()->named('adminCategoryForm.view')
+        || Request::route()->named('category.search')
+        || Request::route()->named('editProductForm.view')
+        || Request::route()->named('adminProductForm.view')
+        || Request::route()->named('product.search')? 'active' : '' }}">
+
+            <div class="slide-wrapper {{ Request::route()->named('adminCategory.view')
+            || Request::route()->named('editCategoryForm.view')
+            || Request::route()->named('adminCategoryForm.view')
+            || Request::route()->named('category.search') ? 'active' : '' }}">
                 <div class=slide-line><span></span></div>
                 <a href="{{ route('adminCategory.view')}}">
                     <span class="material-symbols-outlined">
@@ -52,7 +58,10 @@
                     Category
                 </a>
             </div>
-            <div class="slide-wrapper {{ Request::route()->named('adminProduct.view') ? 'active' : '' }}">
+            <div class="slide-wrapper {{ Request::route()->named('adminProduct.view')
+            || Request::route()->named('editProductForm.view')
+            || Request::route()->named('adminProductForm.view')
+            || Request::route()->named('product.search') ? 'active' : '' }}">
                 <div class=slide-line></div>
                 <a href="{{ route('adminProduct.view')}}">
                     <span class="material-symbols-outlined">

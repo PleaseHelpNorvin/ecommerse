@@ -18,7 +18,9 @@
             Delivered
         </a>
     </div> --}}
-    <div class="sidenav-content {{ Request::route()->named('adminOrder.view') || Request::route()->named('orderlist.view')  ? 'active' : '' }}">
+    <div class="sidenav-content {{ Request::route()->named('adminOrder.view')
+        || Request::route()->named('orderlist.view')
+        || Request::route()->named('order.search')  ? 'active' : '' }}">
         <a href="{{ route('adminOrder.view') }}">
             <span class="material-symbols-outlined">
                 orders
@@ -31,7 +33,10 @@
             || Request::route()->named('adminCategory.view')
             || Request::route()->named('adminProduct.view')
             || Request::route()->named('adminCategoryForm.view')
-            || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
+            || Request::route()->named('adminProductColor.view')
+            || Request::route()->named('category.search')
+            
+            ? 'active' : '' }}">
                 <span class="material-symbols-outlined">
                     pages
                 </span>
