@@ -77,7 +77,7 @@
     .wrapper{
         width: 100%;
         background: #f2f1ec;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         display: flex;
         flex-direction: column;
         justify-content: center;

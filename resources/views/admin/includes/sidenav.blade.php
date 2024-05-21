@@ -35,7 +35,10 @@
             || Request::route()->named('adminCategoryForm.view')
             || Request::route()->named('adminProductColor.view')
             || Request::route()->named('category.search')
-            
+            || Request::route()->named('editCategoryForm.view')
+            || Request::route()->named('product.search')
+            || Request::route()->named('adminProductForm.view')
+            || Request::route()->named('editProductForm.view')
             ? 'active' : '' }}">
                 <span class="material-symbols-outlined">
                     pages
@@ -46,8 +49,14 @@
                 || Request::route()->named('adminCategory.view')
                 || Request::route()->named('adminProduct.view')
                 || Request::route()->named('adminCategoryForm.view')
-                || Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
-            <div class="slide-wrapper {{ Request::route()->named('adminCategory.view','adminCategoryForm.view') ? 'active' : '' }}">
+                || Request::route()->named('editCategoryForm.view')
+                || Request::route()->named('adminProductColor.view')
+                || Request::route()->named('category.search')
+                || Request::route()->named('product.search')
+                || Request::route()->named('adminProductForm.view')
+                || Request::route()->named('editProductForm.view')
+                ? 'active' : '' }}">
+            <div class="slide-wrapper {{ Request::route()->named('adminCategory.view','adminCategoryForm.view','editCategoryForm.view','category.search') ? 'active' : '' }}">
                 <div class=slide-line><span></span></div>
                 <a href="{{ route('adminCategory.view')}}">
                     <span class="material-symbols-outlined">
@@ -56,7 +65,7 @@
                     Category
                 </a>
             </div>
-            <div class="slide-wrapper {{ Request::route()->named('adminProduct.view') ? 'active' : '' }}">
+            <div class="slide-wrapper {{ Request::route()->named('adminProduct.view','product.search','adminProductForm.view','editProductForm.view') ? 'active' : '' }}">
                 <div class=slide-line></div>
                 <a href="{{ route('adminProduct.view')}}">
                     <span class="material-symbols-outlined">
@@ -65,26 +74,18 @@
                     Products
                 </a>
             </div>
-            {{-- <div class="slide-wrapper {{ Request::route()->named('adminProductColor.view') ? 'active' : '' }}">
-                <div class=slide-line></div>
-                <a href="{{ route('adminProductColor.view')}}">
-                    <span class="material-symbols-outlined">
-                        palette
-                    </span>
-                    colors
-                </a>
-            </div> --}}
         </div>
     </div>
     <div class="second-sidenav-content-slide-container" >
-        <div class="second-head-container {{ Request::route()->named('adminUser.view') ? 'active' : '' }}">
+        <div class="second-head-container {{ Request::route()->named('adminUser.view')
+        || Request::route()->named('user.search') ? 'active' : '' }}">
             <span class="material-symbols-outlined">
                 person
             </span>
             <p>Users</p>
         </div>
-        <div class="second-slide-body-container {{ Request::route()->named('adminUser.view') ? 'active' : '' }}">
-            <div class="slide-wrapper {{ Request::route()->named('adminUser.view') ? 'active' : '' }}">
+        <div class="second-slide-body-container {{ Request::route()->named('adminUser.view','user.search') ? 'active' : '' }}">
+            <div class="slide-wrapper {{ Request::route()->named('adminUser.view','user.search') ? 'active' : '' }}">
                 <div class=slide-line></div>
                 <a href="{{ route('adminUser.view')}}">
                     <span class="material-symbols-outlined">
