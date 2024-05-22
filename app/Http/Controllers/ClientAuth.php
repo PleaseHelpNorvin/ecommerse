@@ -14,20 +14,26 @@ class ClientAuth extends Controller
         return view('client.auth.login');
     }
 
-    public function loginAuth(Request $request){
+    public function loginAuth(Request $request)
+    {
         $request->validate([
             'username' => 'required|string|max:255',
             'password' => 'required|string|min:8',
         ]);
-        
+    
         $clientUser = ClientUser::where('username', $request->username)->first();
-        
-        if($clientUser && Hash::check($request->password, $clientUser->password)){
-            return redirect()->route('dashboard.view', ['username' => $clientUser->username]);
+    
+        if($clientUser) {
+            if(Hash::check($request->password, $clientUser->password)) {
+                return redirect()->route('dashboard.view', ['username' => $clientUser->username]);
+            } else {
+                return back()->withInput()->withErrors(['password' => 'Invalid password.']);
+            }
         }
-        return back()->with('message','Invalid Username or Password');
+    
+        return back()->withInput()->withErrors(['username' => 'Invalid username.']);
     }
-
+    
     public function registerIndex(){
         return view('client.auth.register');
     }

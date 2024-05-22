@@ -7,7 +7,7 @@ use App\Models\ClientUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClientOrderController extends Controller
+class ClientOrderController extends ltw1
 {
     //
     public function clientOrder(Request $request, $username) {

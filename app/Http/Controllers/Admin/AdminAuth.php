@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User; // Assuming User model is used for authentication
 
 class AdminAuth extends Controller
 {
-    //
     public function loginIndex(){
         return view('admin.auth.login');
     }
@@ -21,10 +20,19 @@ class AdminAuth extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Auth::attempt($credentials)) {
             return redirect()->route('adminDashboard.view');
         }
-        return redirect()->back()->with('error', 'Invalid credentials');
+
+        if ($user) {
+            // The email exists but the password is wrong
+            return redirect()->back()->withErrors(['password' => 'The password you entered is incorrect.']);
+        }
+
+        // The email does not exist or both email and password are wrong
+        return redirect()->back()->withErrors(['email' => 'Invalid credentials. Please try again.']);
     }
 
     public function logout(Request $request){
@@ -32,5 +40,4 @@ class AdminAuth extends Controller
         $request->session()->regenerate();
         return redirect()->route('adminlogin.view');
     }
-
 }

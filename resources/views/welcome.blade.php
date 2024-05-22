@@ -41,12 +41,16 @@
         }
 
         .right {
-            background: #f2f1ec;
+            background-image: url('{{ asset('backround.png') }}'); /* Change 'your-image.jpg' to your actual image path */
+            background-size: cover;
             width: 50%;
-            padding: 1.5em 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            color: #333;
+            padding: 1.5em;
+            text-align: center;
         }
 
         .Shop-now-btn {
@@ -165,10 +169,9 @@
             </div>
         </aside>
         <aside class="right">
-            <h2>right</h2>
-            <button class="Shop-now-btn">
-                <a type="button" href="{{ route('login.view') }}" class="Shop-now-btn">Shop now</a>
-            </button>
+            <h2 style="margin-bottom: 1rem; color: black;">Discover Products</h2>
+            <p style="font-size: 20px; margin-bottom: 2rem; color: black;">For a Life Well Lived</p>
+            <a href="{{ route('login.view') }}" class="Shop-now-btn">Shop Now</a>
         </aside>
     </div>
 </body>
