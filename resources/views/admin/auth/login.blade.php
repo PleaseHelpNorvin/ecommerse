@@ -14,7 +14,7 @@
             height: 100vh;
         }
 
-        a{
+        a {
             text-decoration: none;
             color: black;
         }
@@ -22,7 +22,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
         }
@@ -64,7 +64,8 @@
         .login-form input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .error{
+
+        .error {
             color: red;
         }
     </style>
@@ -72,26 +73,22 @@
 
 <body>
     <div class="container">
-        <form class="login-form" action="{{route('adminlogin.auth')}}" method="POST">
+        <form class="login-form" action="{{ route('adminlogin.auth') }}" method="POST">
             @csrf
             <h2>Admin Login</h2>
             <div class="form-group">
-                <input type="text" name="email" placeholder="Email Address" >
+                <input type="text" name="email" placeholder="Email Address" value="{{ old('email') }}">
                 @error('email')
-                    <div class="text-danger">{{ $message }}</div>
+                    <div class="error">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group">
-                <input type="password" name="password" placeholder="Password" >
+                <input type="password" name="password" placeholder="Password">
                 @error('password')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>
-            @if(session('message'))
-                <div class="error">{{ session('message') }}</div>
-            @endif
             <input type="submit" value="Login">
-            {{-- <p>No account? <a href="{{route('register.view')}}">Register here!</a></p> --}}
         </form>
     </div>
 </body>

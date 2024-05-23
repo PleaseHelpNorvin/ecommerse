@@ -40,7 +40,7 @@ class ClientOrderController extends Controller
 
     public function cancelOrder(Request $request, $orderNumber){
         $orders = Order::where('order_number', $orderNumber)->get();
-    
+
         foreach ($orders as $order) {
             $order->status = 'Cancelled';
             $order->save();

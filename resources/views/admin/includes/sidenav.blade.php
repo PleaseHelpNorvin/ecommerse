@@ -1,5 +1,5 @@
 <div class="sidenav-header">
-    <h1>Logo Test</h1>
+    <h1>SnapShop</h1>
 </div>
 <div class="sidenav-main">
     <div class="sidenav-content {{ Request::route()->named('adminDashboard.view') ? 'active' : '' }}">
