@@ -164,7 +164,7 @@
                 </div>
                 <div class="right-picture">
                     {{-- right --}}
-                    <img src="{{ asset('roldan.png')}}" class="right-animated-image" alt="Image 1">
+                    <img src="{{ asset('steven.jpg')}}" class="right-animated-image" alt="Image 1">
                 </div>
             </div>
         </aside>

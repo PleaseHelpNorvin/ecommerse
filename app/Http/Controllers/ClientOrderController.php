@@ -7,7 +7,7 @@ use App\Models\ClientUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClientOrderController extends ltw1
+class ClientOrderController extends Controller
 {
     //
     public function clientOrder(Request $request, $username) {
@@ -40,7 +40,7 @@ class ClientOrderController extends ltw1
 
     public function cancelOrder(Request $request, $orderNumber){
         $orders = Order::where('order_number', $orderNumber)->get();
-    
+
         foreach ($orders as $order) {
             $order->status = 'Cancelled';
             $order->save();
