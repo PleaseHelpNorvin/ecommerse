@@ -22,25 +22,5 @@
                 <p>{{$countClientUser}}</p>
             </div>
         </div>
-        {{-- <div class="dashboard-content-container">
-            <div class="chart-container">
-                pie chart
-            </div>
-            <div class="chart-container">
-                pie chart
-            </div>
-            <div class="chart-container">
-                pie chart
-            </div>
-            <div class="chart-container">
-                pie chart
-            </div>
-            <div class="chart-container">
-                pie chart
-            </div>
-            <div class="chart-container">
-                pie chart
-            </div>
-        </div> --}}
     </div>
 @endsection

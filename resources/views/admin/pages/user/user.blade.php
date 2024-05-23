@@ -13,12 +13,6 @@
                 </form>
             </div>
         </div>
-        {{-- <div class="order-nav">
-            <a href="">All</a>
-            <a href="">Active</a>
-            <a href="">Inactive</a>
-            <a href="">Cancelled</a>
-        </div> --}}
         <div class="table-container">
             <table class="table">
                 <thead>
@@ -39,11 +33,7 @@
                             <td>{{ $user->fullname}}</td>
                             <td>{{ $user->email}}</td>
                             <td>{{ $user->phonenumber}}</td>
-                            <td >
-                                {{-- <button class="btn-edit"><span class="material-symbols-outlined">
-                                        edit
-                                    </span>
-                                </button> --}}
+                            <td>
                                 <button class="btn-delete"><span class="material-symbols-outlined">
                                         delete
                                     </span>
