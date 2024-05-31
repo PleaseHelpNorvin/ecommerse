@@ -2,7 +2,7 @@
 @section('main')
     <div class="wrapper">
         <div>
-            <p>your orders</p>
+            <p>Your Orders</p>
         </div>
         <div class="order-header">
             <div class="order-divider">

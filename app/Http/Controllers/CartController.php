@@ -118,7 +118,4 @@ class CartController extends Controller
         }
         return redirect()->route('clientorder.view', ['username' => $username]);
     }
-
-    
-    
 }

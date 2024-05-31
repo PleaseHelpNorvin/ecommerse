@@ -69,9 +69,16 @@
                 settings
             </span>Settings</a>
     </li> --}}
-    <li><a href=""><span class="material-symbols-outlined">
+    <li><a href="{{route('clientprofile.view',['username' => $username])}}"><span class="material-symbols-outlined">
                 account_circle
-            </span>Profile</a>
+            </span>Profile
+        </a>
+        <a href="{{route('client.logout')}}">
+            <span class="material-symbols-outlined">
+                logout
+            </span>
+            <p>Log Out</p>
+        </a>
     </li>
 </ul>
 

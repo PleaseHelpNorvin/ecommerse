@@ -21,7 +21,7 @@
                     <h5 class="product-number">Quantity</h5>
                     <div class="product-add">
                         <span class="decrement">-</span>
-                        <input type="text" class="quantity" value="1" name="quantity">
+                        <input type="text" class="quantity" value="1" name="quantity" readonly>
                         <span class="increment">+</span>
                     </div>
                     <div class="product-addtocart">

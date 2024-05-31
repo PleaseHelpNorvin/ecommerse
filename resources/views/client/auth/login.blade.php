@@ -32,8 +32,22 @@
             width: 100%;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+        }
+
+        .button-container{
+            /* border: 1px solid black; */
+            height: 30px;
+            width: 340px;
+        }
+        
+        .button-container a{
+            background: #41c1ba;
+            width: 100%;
+            height: 100%;
+            /* border: 1px solid red; */
         }
 
         .login-form {
@@ -72,6 +86,9 @@
 
 <body>
     <div class="container">
+        <div class="button-container">
+            <a href="{{route('landingpage')}}">Back</a>
+        </div>
         <form class="login-form" action="{{route('login.auth')}}" method="POST">
             @csrf
             <h2>Login</h2>

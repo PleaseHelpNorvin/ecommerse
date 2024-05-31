@@ -29,7 +29,7 @@ use App\Http\Controllers\Admin\ProductColorController as adminProductColorContro
 //landingpage route
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('landingpage');
 
 
 //client login/register
