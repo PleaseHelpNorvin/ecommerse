@@ -16,7 +16,7 @@ class ProductController extends Controller
         $products = Product::select('products.*', 'category.categoryName')
                         // ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
                         ->leftJoin('category', 'products.category_id', '=', 'category.id')
-                        ->simplePaginate(4);
+                        ->simplePaginate(3);
         return view('admin.pages.product.product', compact('products'));
     }
 
@@ -67,8 +67,6 @@ class ProductController extends Controller
             'productName' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category_id' => 'required',
-            // 'color_id' => 'required',
-            // 'stockQuantity' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'imageUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -76,7 +74,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         if ($request->hasFile('imageUpload')) {
-            // Get the uploaded file
             $image = $request->file('imageUpload');
             $imageName = uniqid().'.'.$image->getClientOriginalExtension();
             $directory = 'product_images';
@@ -88,8 +85,6 @@ class ProductController extends Controller
         $product->productName = $validatedData['productName'];
         $product->description = $validatedData['description'];
         $product->category_id = $validatedData['category_id'];
-        // $product->color_id = $validatedData['color_id'];
-        // $product->stockQuantity = $validatedData['stockQuantity'];
         $product->price = $validatedData['price'];
 
         $product->save();
@@ -100,14 +95,11 @@ class ProductController extends Controller
     public function productSearch(Request $request){
         $searchQuery = $request->input('search-product');
         $products = Product::select('products.*', 'category.categoryName')
-            // ->leftJoin('product_color', 'products.color_id', '=', 'product_color.id')
             ->leftJoin('category', 'products.category_id', '=', 'category.id')
             ->where(function($query) use ($searchQuery) {
             $query->where('products.productName', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('products.description', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('category.categoryName', 'LIKE', '%' . $searchQuery . '%')
-                    // ->orWhere('product_color.name', 'LIKE', '%' . $searchQuery . '%')
-                    // ->orWhere('products.stockQuantity', 'LIKE', '%' . $searchQuery . '%')
                     ->orWhere('products.price', 'LIKE', '%' . $searchQuery . '%');
         })->Paginate(0);
         return view('admin.pages.product.product', compact('products'));

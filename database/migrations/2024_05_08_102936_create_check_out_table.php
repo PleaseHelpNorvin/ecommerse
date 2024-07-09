@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('clientuser_id')->references('id')->on('client_user');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            // $table->string('color');
             $table->integer('quantity');
             $table->decimal('item_total_price', 10, 2);
             $table->timestamps();

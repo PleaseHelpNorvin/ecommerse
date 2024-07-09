@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function editCategoryPost(Request $request, $id){
         $validatedData = $request->validate([
             'categoryName' => 'required|string|max:255',
-            'imageUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Allow null to retain the existing image if not updated
+            'imageUpload' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $category = Category::findOrFail($id);

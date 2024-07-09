@@ -89,6 +89,9 @@
             background-color: #41c1ba;
             color: white;
         }
+        .text-danger{
+            color: red;
+        }
     </style>
 </head>
 

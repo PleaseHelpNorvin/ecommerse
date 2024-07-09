@@ -27,11 +27,9 @@ class AdminAuth extends Controller
         }
 
         if ($user) {
-            // The email exists but the password is wrong
             return redirect()->back()->withErrors(['password' => 'The password you entered is incorrect.']);
         }
 
-        // The email does not exist or both email and password are wrong
         return redirect()->back()->withErrors(['email' => 'Invalid credentials. Please try again.']);
     }
 

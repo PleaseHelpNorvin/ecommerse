@@ -1,5 +1,5 @@
 <div class="profile-circular-image">
-    <img src="{{ asset('roldan.png') }}" alt="{{ asset('roldan.png') }}">
+    <img src="{{ asset('tatoy.png') }}" alt="{{ asset('tatoy.png') }}">
     <div class="profile-text">
         <h1>Welcome,</h1>
         <p>{{$username}}</p>

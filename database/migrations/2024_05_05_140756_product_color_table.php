@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('product_color', function (Blueprint $table) {
             $table->id();
-            // Add columns for product color attributes
             $table->string('name');
             $table->string('code')->unique();
             $table->timestamps();

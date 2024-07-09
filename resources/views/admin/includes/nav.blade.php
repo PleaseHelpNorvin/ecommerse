@@ -21,7 +21,7 @@
 </div> --}}
 <div class="nav-spacer"></div>
 <div class ="profile-dropdown">
-    <img src="{{asset('roldan.png')}}" alt="" class="profile-dropdown-img">
+    <img src="{{asset('tatoy.png')}}" alt="" class="profile-dropdown-img">
     <div class="profile-dropdown-content">
         <a href="{{route('admin.logout')}}">Logout</a>
     </div>

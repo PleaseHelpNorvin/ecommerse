@@ -160,11 +160,11 @@
             <div class="picture-container">
                 <div class="left-picture">
                     {{-- left --}}
-                    <img src="{{ asset('roldan.png')}}" class="left-animated-image" alt="Image 1">
+                    <img src="{{ asset('tatoy.png')}}" class="left-animated-image" alt="Image 1">
                 </div>
                 <div class="right-picture">
                     {{-- right --}}
-                    <img src="{{ asset('steven.jpg')}}" class="right-animated-image" alt="Image 1">
+                    <img src="{{ asset('tatoy.png')}}" class="right-animated-image" alt="Image 1">
                 </div>
             </div>
         </aside>

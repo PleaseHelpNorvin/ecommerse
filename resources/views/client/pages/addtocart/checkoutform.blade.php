@@ -54,7 +54,7 @@
                 <label for="mode_of_payment">Mode of Payment:</label>
                 <select name="mode_of_payment" id="mode_of_payment">
                     <option value="">Select Mode of Payment</option>
-                    <option value="Gcash">Gcash</option>
+                    {{-- <option value="Gcash">Gcash</option> --}}
                     <option value="COD">COD</option>
                 </select>
                 @error('mode_of_payment')
